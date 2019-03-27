@@ -1,17 +1,14 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using NUnit.Framework;
 using TestHelper;
-using Bluewire.Analysers;
 
 namespace Bluewire.Analysers.Test
 {
-    [TestClass]
+    [TestFixture]
     public class UnitTest : CodeFixVerifier
     {
-        [TestMethod]
+        [Test]
         public void EmptyFileYieldsNoDiagnostics()
         {
             var test = @"";
@@ -30,7 +27,7 @@ namespace Bluewire.Analysers.Test
                         }
             };
 
-        [TestMethod]
+        [Test]
         public void IncorrectNamespaceYieldsNamespaceDiagnostic()
         {
             var test = @"
@@ -62,7 +59,7 @@ namespace Bluewire.Analysers.Test
             VerifyCSharpDiagnostic(test, expected, fileNameDiagnostic);
         }
 
-        [TestMethod]
+        [Test]
         public void CorrectNamespaceDoesNotYieldNamespaceDiagnostic()
         {
             var test = @"
